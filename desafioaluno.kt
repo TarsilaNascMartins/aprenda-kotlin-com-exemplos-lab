@@ -8,18 +8,25 @@ data class ConteudoEducacional(var nome: String, var duracao: Int , val nivel : 
 }
 
 data class Formacao(val nome: String, var conteudos: List<ConteudoEducacional>) {
+    
+     val inscritos = mutableListOf<Usuario>()
+         
+     fun matricular(usuario: Usuario) {
+         
+               if(inscritos.contains(usuario)){
+               println("\nUsuário já cadastrado! Não será realizada a matrícula!")
+               
+               } else{   
+               val usuarios = usuario.nome
+               inscritos.add(usuario)
+               println("\nCadastro realizado com sucesso!O aluno $usuarios está inscrito no curso: "
+              +"\n$nome com o seguinte conteudo $conteudos")}
+   
 
-    val inscritos = mutableListOf<Usuario>()
-           
-    fun matricular(usuario: Usuario) {
-        val usuarios = usuario.nome
-       // TODO("Utilize o parâmetro $usuario para simular uma matrícula (usar a lista de $inscritos).")
-      inscritos.add(usuario)
-      println("O aluno $usuarios está inscrito no curso $nome com o seguinte conteudo"
-              +"\n $conteudos")
-    }
+     }
+
+
 }
-
 fun main() {
   //  TODO("Analise as classes modeladas para este domínio de aplicação e pense em formas de evoluí-las.")
   //  TODO("Simule alguns cenários de teste. Para isso, crie alguns objetos usando as classes em questão.")
@@ -49,4 +56,7 @@ fun main() {
   //matriculando aluno
   formacao.matricular(usuario)
    
+     //matriculando aluno repetido
+  formacao.matricular(usuario)
+     
 }
