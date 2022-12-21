@@ -1,7 +1,5 @@
 enum class Nivel {BASICO, INTERMEDIARIO, DIFICIL}
-
 class Usuario (val nome: String)  
-
 data class ConteudoEducacional(var nome: String, var duracao: Int , val nivel : Nivel){
 //     companion object {
 //    fun conteudo(nome: String, duracao: Int) = println("$nome, $duracao hours") }
@@ -12,7 +10,7 @@ data class Formacao(val nome: String, var conteudos: List<ConteudoEducacional>) 
      val inscritos = mutableListOf<Usuario>()
          
      fun matricular(usuario: Usuario) {
-         
+    
                if(inscritos.contains(usuario)){
                println("\nUsuário já cadastrado! Não será realizada a matrícula!")
                
@@ -20,43 +18,34 @@ data class Formacao(val nome: String, var conteudos: List<ConteudoEducacional>) 
                val usuarios = usuario.nome
                inscritos.add(usuario)
                println("\nCadastro realizado com sucesso!O aluno $usuarios está inscrito no curso: "
-              +"\n$nome com o seguinte conteudo $conteudos")}
-   
-
+              +"\n$nome com o seguinte conteudo $conteudos")
      }
 
 
 }
 fun main() {
-  //  TODO("Analise as classes modeladas para este domínio de aplicação e pense em formas de evoluí-las.")
-  //  TODO("Simule alguns cenários de teste. Para isso, crie alguns objetos usando as classes em questão.")
-
     
-//   val usuario = listOf(
-//   Usuario("Bob"),
-//   Usuario("Tarsila"),
-// )
-
-  
-
-//   usuario.forEach {
-//     println(it.nome)
-// }
-  
-  
    //testando entrada de usuário
-  val usuario = Usuario("Bob")
-  
+  val usuario1 = Usuario("Bob")
+  val usuario2 = Usuario("Patrick")
+  val usuario3 = Usuario("Molusco")
+ 
    //testando entrada de Conteudo Educacional
-  val conteudo1 = ConteudoEducacional("Mobile", 30, Nivel.BASICO)
-
-  //testando entrada de informações da Formação
-  val formacao = Formacao("Mobile", listOf(conteudo1))
-  
-  //matriculando aluno
-  formacao.matricular(usuario)
+  val conteudoMobile = ConteudoEducacional("Desenvolvedor Mobile", 30, Nivel.BASICO)
+  val conteudoDados = ConteudoEducacional("Cientista de Dados", 20, Nivel.INTERMEDIARIO)
+  val conteudoUX = ConteudoEducacional("Designer UX", 60, Nivel.DIFICIL)
+     
+    //testando entrada de informações da Formação
+  val formacaoMobile = Formacao("Kotlin, Layout, Firebase, API", listOf(conteudoMobile))
+  val formacaoCientistaDados = Formacao("SQL, Python, Cloud Computer", listOf(conteudoDados))
+  val formacaoUX = Formacao("Arquitetura UX, Figma, Protótipos", listOf(conteudoUX))
    
-     //matriculando aluno repetido
-  formacao.matricular(usuario)
+  //matriculando aluno
+  formacaoMobile.matricular(usuario1)
+  formacaoCientistaDados.matricular(usuario2)
+  formacaoUX.matricular(usuario3)
+    
+    //matriculando aluno repetido
+  formacaoMobile.matricular(usuario1)
      
 }
